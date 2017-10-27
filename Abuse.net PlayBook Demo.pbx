@@ -19,8 +19,8 @@
       },
       "value" : "#Trigger:780:trg.tc.host!String"
     } ],
-    "locationLeft" : 320.0,
-    "locationTop" : 220.0,
+    "locationLeft" : 550.0,
+    "locationTop" : 210.0,
     "outputVariables" : "[{\"name\":\"abuse.contacts\",\"type\":\"StringArray\"}]",
     "playbookRetryEnabled" : false
   }, {
@@ -94,8 +94,8 @@
         "paramName" : "labels"
       }
     } ],
-    "locationLeft" : 400.0,
-    "locationTop" : 370.0,
+    "locationLeft" : 760.0,
+    "locationTop" : 330.0,
     "playbookRetryEnabled" : false
   }, {
     "id" : 8468,
@@ -145,14 +145,23 @@
     "id" : 780,
     "name" : "Create Host Trigger",
     "type" : "Host",
-    "eventType" : "Create",
+    "eventType" : "AddTag",
     "locationLeft" : 80.0,
-    "locationTop" : 110.0,
+    "locationTop" : 40.0,
     "anyOrg" : false,
-    "orFilters" : false,
+    "orFilters" : true,
     "fireOnDuplicate" : false,
     "renderBodyAsTip" : false,
+    "playbookTriggerFilterList" : [ {
+      "fieldType" : "Tag",
+      "operatorType" : "Equals",
+      "value" : "phishing"
+    }, {
+      "fieldType" : "Tag",
+      "operatorType" : "Equals",
+      "value" : "spam"
+    } ],
     "outputVariables" : "[{\"name\":\"trg.tc.host\",\"type\":\"String\"},{\"name\":\"trg.tc.entity\",\"type\":\"TCEntity\"}]"
   } ],
-  "dateExported" : "10/27/17 3:42 AM"
+  "dateExported" : "10/27/17 1:34 PM"
 }
