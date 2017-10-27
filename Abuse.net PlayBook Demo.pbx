@@ -1,0 +1,158 @@
+{
+  "definitionVersion" : "1.0.0",
+  "name" : "Abuse.net PlayBook Demo",
+  "panX" : 20.0,
+  "panY" : 20.0,
+  "logLevel" : "TRACE",
+  "description" : "MT",
+  "jobList" : [ {
+    "id" : 8461,
+    "appCatalogItem" : {
+      "programName" : "TCPB - AbuseNet v0.0",
+      "displayName" : "Query abuse.net",
+      "programVersion" : "0.0.1"
+    },
+    "name" : "Query abuse.net",
+    "jobParameterList" : [ {
+      "appCatalogItemParameter" : {
+        "paramName" : "host_to_search"
+      },
+      "value" : "#Trigger:780:trg.tc.host!String"
+    } ],
+    "locationLeft" : 320.0,
+    "locationTop" : 220.0,
+    "outputVariables" : "[{\"name\":\"abuse.contacts\",\"type\":\"StringArray\"}]",
+    "playbookRetryEnabled" : false
+  }, {
+    "id" : 8465,
+    "appCatalogItem" : {
+      "programName" : "TCPB - EmailAddressCreate v1.1",
+      "displayName" : "Create ThreatConnect EmailAddress",
+      "programVersion" : "1.1.5"
+    },
+    "name" : "Add abuse email contacts",
+    "jobParameterList" : [ {
+      "appCatalogItemParameter" : {
+        "paramName" : "resource_name"
+      },
+      "value" : "#App:8461:abuse.contacts!StringArray"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "tags"
+      },
+      "value" : "abuse.net"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "tags_all"
+      },
+      "value" : "true"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "attributes_all"
+      },
+      "value" : "true"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "resource_type"
+      },
+      "value" : "EmailAddress"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "confidence"
+      }
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "labels_all"
+      },
+      "value" : "true"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "fail_on_error"
+      },
+      "value" : "true"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "associations"
+      },
+      "value" : ""
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "rating"
+      }
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "owner"
+      },
+      "value" : "mt-csv-ci"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "attributes"
+      },
+      "value" : "[]"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "labels"
+      }
+    } ],
+    "locationLeft" : 400.0,
+    "locationTop" : 370.0,
+    "playbookRetryEnabled" : false
+  }, {
+    "id" : 8468,
+    "appCatalogItem" : {
+      "programName" : "TCPB - TagCreate v1.0",
+      "displayName" : "Create ThreatConnect Tag",
+      "programVersion" : "1.0.3"
+    },
+    "name" : "Add abuse.net tag to Host",
+    "jobParameterList" : [ {
+      "appCatalogItemParameter" : {
+        "paramName" : "fail_on_error"
+      },
+      "value" : "false"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "tag"
+      },
+      "value" : "abuse.net"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "entity"
+      },
+      "value" : "#Trigger:780:trg.tc.entity!TCEntity"
+    } ],
+    "locationLeft" : 320.0,
+    "locationTop" : 110.0,
+    "playbookRetryEnabled" : false
+  } ],
+  "playbookConnectionList" : [ {
+    "type" : "Pass",
+    "isCircularOnTarget" : false,
+    "sourceJobId" : 8461,
+    "targetJobId" : 8465
+  }, {
+    "type" : "Pass",
+    "isCircularOnTarget" : false,
+    "targetJobId" : 8468,
+    "sourceTriggerId" : 780
+  }, {
+    "type" : "Pass",
+    "isCircularOnTarget" : false,
+    "sourceJobId" : 8468,
+    "targetJobId" : 8461
+  } ],
+  "playbookTriggerList" : [ {
+    "id" : 780,
+    "name" : "Create Host Trigger",
+    "type" : "Host",
+    "eventType" : "Create",
+    "locationLeft" : 80.0,
+    "locationTop" : 110.0,
+    "anyOrg" : false,
+    "orFilters" : false,
+    "fireOnDuplicate" : false,
+    "renderBodyAsTip" : false,
+    "outputVariables" : "[{\"name\":\"trg.tc.host\",\"type\":\"String\"},{\"name\":\"trg.tc.entity\",\"type\":\"TCEntity\"}]"
+  } ],
+  "dateExported" : "10/27/17 3:42 AM"
+}
