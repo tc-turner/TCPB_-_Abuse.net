@@ -3,8 +3,8 @@
   "name" : "Abuse.net PlayBook Demo",
   "panX" : 20.0,
   "panY" : 20.0,
-  "logLevel" : "TRACE",
-  "description" : "MT",
+  "logLevel" : "INFO",
+  "description" : "Abuse.net Query",
   "jobList" : [ {
     "id" : 8461,
     "appCatalogItem" : {
@@ -83,7 +83,7 @@
       "appCatalogItemParameter" : {
         "paramName" : "owner"
       },
-      "value" : "mt-csv-ci"
+      "value" : "Abuse Source"
     }, {
       "appCatalogItemParameter" : {
         "paramName" : "attributes"
