@@ -1,0 +1,33 @@
+{
+  "allowOnDemand": true,
+  "displayName": "Query abuse.net",
+  "languageVersion": "2.7",
+  "listDelimiter": "|",
+  "note": "Query abuse.net for Host POCs",
+  "params": [{
+    "encrypt": false,
+    "label": "Host",
+    "name": "host_to_search",
+    "note": "Host to search for",
+    "playbookDataType": [
+      "String"
+    ],
+    "required": true,
+    "sequence": 1
+  }],
+  "playbook": {
+    "outputVariables": [{
+      "name": "abuse.debug",
+      "type": "String"
+    },
+    {
+      "name":"abuse.contacts",
+      "type": "StringArray"
+    }],
+    "type": "Client"
+  },
+  "programLanguage": "PYTHON",
+  "programMain": "pb_abusenet",
+  "programVersion": "0.0.1",
+  "runtimeLevel": "Playbook"
+}
